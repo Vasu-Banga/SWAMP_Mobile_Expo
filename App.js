@@ -1,21 +1,49 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import AboutPage from "./pages/About";
+import MatchScoutSetup from "./pages/MatchScoutSetup";
+import MatchScoutTabNav from "./navigation/MatchScoutTabNav";
+import PitScouting from "./pages/PitScouting";
+const Stack = createStackNavigator();
 
-export default function App() {
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    <NavigationContainer>
+      <Stack.Navigator 
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#007200",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: 'bold', //Set Header text style
+            },
+          }}>
+             <Stack.Screen 
+            name="About"
+            component={AboutPage}
+            options={{ title: 'About' }}
+          /> 
+          <Stack.Screen 
+            name="MatchScouting"
+            component={MatchScoutSetup}
+            options={{ title: 'Match Scouting' }}
+          />
+          <Stack.Screen 
+            name="MatchScoutTabNav"
+            component={MatchScoutTabNav}
+            options={{ title: 'Match Scouting' }}
+          /> 
+           <Stack.Screen 
+            name="PitScouting"
+            component={PitScouting}
+            options={{ title: 'Pit Scouting' }}
+          />   
+          </Stack.Navigator>
+    </NavigationContainer>
+  )
+
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
