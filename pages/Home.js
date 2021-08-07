@@ -4,12 +4,12 @@ import React from "react";
 import { View, Button, Text, StyleSheet, KeyboardAvoidingView } from "react-native";
 import MenuButton from "../components/MenuButton";
 import PageFooter from "../components/PageFooter";
-import SQLite from "react-native-sqlite-storage";
+import * as SQLite from 'expo-sqlite';
 
 //Open the database once for all components 
 global.db = SQLite.openDatabase(
   { name: 'Swamp.db' },
-    () => { }, 
+    () => { console.log("Database Opened")}, 
     error => {
       console.log("Database Open Error: "+ error);
     }
@@ -83,12 +83,16 @@ const Home = ({ navigation }) => {
     console.log("Loading Global Settings from DB...");
     let sql1 = "Select key,val from Settings; ";
     let setarr = []; 
-    let selectQuery = await ExecuteQuery(sql1,[]);
+    let selectQuery = ExecuteQuery(sql1,[]);
+    console.log(selectQuery.rows)
     for (let i = 0; i < selectQuery.rows.length; i++) {
       setarr.push({"key": selectQuery.rows.item(i).key,"value": selectQuery.rows.item(i).val});
     }
     //load a global variable for all pages to use 
+    console.log("Global Settings Initializing...")
     global.settings = setarr;
+    console.log("Global Settings Initialized")
+    
   } 
 
   loadSettings();
@@ -146,7 +150,7 @@ const Home = ({ navigation }) => {
         >
           <View style={styles.Newsbox}>
             <Text style={styles.TextHeading}>
-              Welcome the SWAMP Scouting !!!! 
+              Welcome the SWAMP Scouting !!!!(Mobile Version) 
             </Text>
 
             <Text style={styles.TextNormal}>

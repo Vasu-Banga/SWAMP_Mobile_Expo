@@ -12,7 +12,8 @@ const About = (navigation, route) => {
           style={{flex:1, justifyContent: "space-between"}} 
         >
           <View style={styles.center}>
-            <Text>This is the about screen</Text>
+            <Text>This is the Frog Force Scouting App, also known as SWAMP</Text>
+            <Text>This App is currently in Beta testing, but will be complete shortly</Text>
           </View>
         </KeyboardAvoidingView> 
 
